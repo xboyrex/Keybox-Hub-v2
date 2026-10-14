@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────
+# Cloudflare Pages headers for Keybox Hub
+# ─────────────────────────────────────────────────────────────
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Downloaded keybox XML files — long lived, content addressed by hash.
+/keyboxes/*
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
+
+# Generated index — refreshed every 6 hours.
+/data/*
+  Cache-Control: public, max-age=1800, must-revalidate
+  Access-Control-Allow-Origin: *
+
+# Static assets with hashed names.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts
+/_next/static/media/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# HTML — always revalidate so the newest index shows up quickly.
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+/
+  Cache-Control: public, max-age=300, must-revalidate

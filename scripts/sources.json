@@ -1,0 +1,51 @@
+{
+  "$schema": "./sources.schema.json",
+  "description": "Seed repositories for Keybox Hub. The fetcher merges these with results from the GitHub Search API, de-duplicates, sorts by stars desc then pushed_at desc, and keeps the top 20. Seeds that 404 are skipped silently.",
+  "seeds": [
+    "GrapheneOS/os_issue_tracker",
+    "chiteroman/PlayIntegrityFix",
+    "HuskyDG/magisk-files",
+    "Magisk-Modules-Repo/playintegrityfix",
+    "kdrag0n/safetynet-fix",
+    "Displax/safetynet-fix",
+    "topjohnwu/Magisk",
+    "5ec1cff/TrickyStore",
+    "beakthoven/TrickyStoreOSS",
+    "qwertyuiop8899/keybox",
+    "android-keybox/keybox",
+    "KeyboxHub/keyboxes",
+    "pommespeter/keybox",
+    "xda-developers/keybox",
+    "LineageOS/android_device_google_gs101",
+    "Pixels-Devices/keybox",
+    "shakalaca/keybox",
+    "ryanloh/keybox",
+    "keybox-collection/keybox-collection",
+    "TheCustomDroid/android-keybox"
+  ],
+  "search": {
+    "repositories": [
+      "keybox in:name,description,readme",
+      "keybox.xml in:readme",
+      "attestation keybox in:name,description"
+    ],
+    "code": [
+      "filename:keybox.xml",
+      "filename:Keybox.xml"
+    ],
+    "maxSources": 20,
+    "sortBy": "stars",
+    "order": "desc"
+  },
+  "filePatterns": [
+    "keybox.xml",
+    "*keybox*.xml",
+    "Keybox*.xml",
+    "KEYBOX*.XML"
+  ],
+  "limits": {
+    "maxFilesPerRepo": 40,
+    "maxTotalFiles": 600,
+    "maxCommitLookups": 400
+  }
+}

@@ -1,0 +1,60 @@
+name: Lighthouse
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Lighthouse audit (desktop)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build
+        env:
+          NODE_VERSION: 20
+        run: npm run build
+
+      - name: Serve static output
+        run: |
+          npx --yes serve out -l 4321 &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4321/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl -sf http://localhost:4321/ > /dev/null || { echo "server not up"; exit 1; }
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            http://localhost:4321/
+            http://localhost:4321/about/
+            http://localhost:4321/sources/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          runs: 1
+          budgetPath: ./.github/lighthouse-budget.json

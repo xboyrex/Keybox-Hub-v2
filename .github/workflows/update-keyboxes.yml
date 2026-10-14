@@ -1,0 +1,91 @@
+name: Update Keyboxes
+
+on:
+  schedule:
+    # Every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force a rebuild even if nothing changed'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-keyboxes
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Fetch & index keyboxes
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Fetch keyboxes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run fetch
+
+      - name: Build index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build-index
+
+      - name: Show summary
+        run: |
+          echo "### Keybox Hub update" >> "$GITHUB_STEP_SUMMARY"
+          node -e "
+            const fs = require('fs');
+            const p = 'public/data/index.json';
+            if (!fs.existsSync(p)) { console.log('no index'); process.exit(0); }
+            const i = JSON.parse(fs.readFileSync(p, 'utf8'));
+            console.log('| Metric | Value |');
+            console.log('| --- | --- |');
+            console.log('| Keyboxes | ' + i.totalKeyboxes + ' |');
+            console.log('| Sources | ' + i.totalSources + ' |');
+            console.log('| Generated | ' + i.generatedAt + ' |');
+          " >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit changes
+        run: |
+          set -e
+          git config user.name  "keybox-hub-bot"
+          git config user.email "keybox-hub-bot@users.noreply.github.com"
+
+          git add -A public/keyboxes public/data
+
+          if git diff --staged --quiet; then
+            echo "No changes detected — nothing to commit."
+            exit 0
+          fi
+
+          CHANGED=$(git diff --staged --name-only | wc -l)
+          git commit -m "chore: auto-update keyboxes [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
+
+          echo "Committed $CHANGED changed file(s)."

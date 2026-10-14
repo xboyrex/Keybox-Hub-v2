@@ -1,0 +1,3 @@
+# This directory holds the mirrored keybox XML files.
+# It is populated automatically by `npm run fetch` and committed by
+# the "Update Keyboxes" GitHub Actions workflow.

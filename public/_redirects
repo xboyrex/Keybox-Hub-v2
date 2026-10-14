@@ -1,0 +1,3 @@
+# SPA-ish fallback is unnecessary — every route is pre-rendered.
+# This just normalises legacy hash-style links.
+/keybox/*  /keybox/:splat/  301
