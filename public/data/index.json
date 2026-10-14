@@ -1,7 +1,33 @@
 {
-  "generatedAt": "1970-01-01T00:00:00.000Z",
-  "totalKeyboxes": 0,
-  "totalSources": 0,
-  "keyboxes": [],
-  "sources": []
+  "generatedAt": "2026-10-14T18:12:58.794Z",
+  "totalKeyboxes": 1,
+  "totalSources": 1,
+  "keyboxes": [
+    {
+      "id": "57ff10ee68b7",
+      "filename": "keybox.xml",
+      "path": "module/keybox.xml",
+      "sourceRepo": "beakthoven/TrickyStoreOSS",
+      "sourceUrl": "https://github.com/beakthoven/TrickyStoreOSS/blob/main/module/keybox.xml",
+      "rawUrl": "https://raw.githubusercontent.com/beakthoven/TrickyStoreOSS/main/module/keybox.xml",
+      "localPath": "/keyboxes/beakthoven-trickystoreoss-57ff10ee-keybox.xml",
+      "sha256": "57ff10ee68b76aecf7760da9bb3bba621d8509d8196e10a22d89aa8371cbb849",
+      "size": 7513,
+      "lastCommit": "2025-08-06T15:31:18Z",
+      "discoveredAt": "2026-10-14T18:12:45.225Z",
+      "verified": false,
+      "xmlValid": true
+    }
+  ],
+  "sources": [
+    {
+      "repo": "beakthoven/TrickyStoreOSS",
+      "url": "https://github.com/beakthoven/TrickyStoreOSS",
+      "stars": 1464,
+      "forks": 128,
+      "lastUpdated": "2026-10-13T22:15:31Z",
+      "keyboxCount": 1,
+      "description": "Open source alternative to proprietary Tricky Store module"
+    }
+  ]
 }
