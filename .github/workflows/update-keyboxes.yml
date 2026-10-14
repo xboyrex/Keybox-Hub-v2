@@ -2,7 +2,7 @@ name: Update Keyboxes
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-      - name: Fetch live sources (Yuri, Meow, Tricky Addon)
+      - name: Fetch live sources (Yuri, Meow, Tricky)
         run: npm run fetch-live
 
       - name: Fetch GitHub repos
