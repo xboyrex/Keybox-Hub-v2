@@ -11,7 +11,8 @@
     "lint": "next lint",
     "fetch": "tsx scripts/fetch-keyboxes.ts",
     "build-index": "tsx scripts/generate-index.ts",
-    "deploy": "npm run fetch && npm run build-index && npm run build"
+    "deploy": "npm run fetch-live && npm run fetch && npm run build-index && npm run build",
+    "fetch-live": "tsx scripts/fetch-live-sources.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
