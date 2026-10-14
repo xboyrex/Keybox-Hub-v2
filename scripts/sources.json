@@ -1,27 +1,24 @@
 {
   "$schema": "./sources.schema.json",
-  "description": "Seed repositories for Keybox Hub. The fetcher merges these with results from the GitHub Search API, de-duplicates, sorts by stars desc then pushed_at desc, and keeps the top 20. Seeds that 404 are skipped silently.",
+  "description": "Seed repositories for Keybox Hub. Merged with GitHub Search API results.",
   "seeds": [
-    "GrapheneOS/os_issue_tracker",
+    "beakthoven/TrickyStoreOSS",
+    "5ec1cff/TrickyStore",
+    "Yurii0307/yurikey",
+    "MeowDump/Integrity-Box",
+    "purainity/keybox-tools",
     "chiteroman/PlayIntegrityFix",
     "HuskyDG/magisk-files",
     "Magisk-Modules-Repo/playintegrityfix",
+    "soralis0912/keybox",
+    "hongshui3000/keybox",
+    "WongKit/keybox",
+    "TheGenesisOfAngel/keybox",
+    "codehz/keybox",
+    "vvb2060/KeyAttestation",
     "kdrag0n/safetynet-fix",
     "Displax/safetynet-fix",
-    "topjohnwu/Magisk",
-    "5ec1cff/TrickyStore",
-    "beakthoven/TrickyStoreOSS",
-    "qwertyuiop8899/keybox",
-    "android-keybox/keybox",
-    "KeyboxHub/keyboxes",
-    "pommespeter/keybox",
-    "xda-developers/keybox",
-    "LineageOS/android_device_google_gs101",
-    "Pixels-Devices/keybox",
-    "shakalaca/keybox",
-    "ryanloh/keybox",
-    "keybox-collection/keybox-collection",
-    "TheCustomDroid/android-keybox"
+    "topjohnwu/Magisk"
   ],
   "search": {
     "repositories": [
@@ -33,7 +30,7 @@
       "filename:keybox.xml",
       "filename:Keybox.xml"
     ],
-    "maxSources": 20,
+    "maxSources": 30,
     "sortBy": "stars",
     "order": "desc"
   },
